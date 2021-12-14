@@ -1,8 +1,18 @@
+body{
+    margin: 0;
+}
+
 header {
-    margin: 10px;
+    margin:0;
+    margin-bottom: 2%;
+    padding: 6% 8%;
+    /* background-color: #ec4949; */
+    /* background-color: #38e0a3; */
+    background-color: #B0FFAE;
 }
 
 h1{
+    margin: 0;
     font-size: 50px;
     font-weight: 800;
 }
@@ -11,6 +21,10 @@ h2{
     font-size: 30px;
 }
 
+#searchIngrForm{
+margin: 0.2% 1%;
+}
+
 #recipe{
-margin: 50px 10px;
+margin: 3% 1%;
 }
