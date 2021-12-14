@@ -18,6 +18,7 @@ h1{
 }
 
 h2{
+    margin-top: 0;
     font-size: 30px;
 }
 
@@ -25,6 +26,19 @@ h2{
 margin: 0.2% 1%;
 }
 
-#recipe{
+#recipeItem{
 margin: 3% 1%;
+display: flex;
+flex-direction: row;
+/* flex-wrap: nowrap; */
+}
+
+#recipeItem.img{
+    margin: 1%;
+    margin-left: 4%;
+}
+
+#saveRecipeBtn{
+    width: 100px;
+    height: 20px;
 }

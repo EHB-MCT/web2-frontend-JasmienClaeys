@@ -42,21 +42,35 @@ function fetchData(inputIngredients) {
                     usedIngredients.push(" " + usedIngredient);
                 }
 
-                let htmlString = `<div id="recipe">
-                        <h2>${data[h].title}</h2>
-                        <img src="${data[h].image}" alt="">
-                        <p id="usedIngredients"> Your ingredients used: ${usedIngredients}</p>
-                        <p id="otherIngredients"> Other ingredients used: ${missingIngredients}</p>
+                let htmlString = `
+                    <div id="recipeItem">
+                        <div id="recipe">
+                            <h2>${data[h].title}</h2>
+                            <img src="${data[h].image}" alt="">
+                            <p id="usedIngredients"> Your ingredients used: ${usedIngredients}</p>
+                            <p id="otherIngredients"> Other ingredients used: ${missingIngredients}</p>
+                        </div>
                         <button id="saveRecipeBtn">Save recipe</button>
                     </div>`;
 
                 document.getElementById('recipeList').insertAdjacentHTML("afterbegin", htmlString);
 
-                document.getElementById("saveRecipeBtn").addEventListener('click', event => {
+                document.getElementById('saveRecipeBtn').addEventListener('click', event => {
                     event.preventDefault();
 
-                    console.log('clicked!')
+                    console.log('clicked save recipe! ' + data[h].title)
                 });
-            }
+
+                document.getElementById('recipe').addEventListener('click', event => {
+                    event.preventDefault();
+
+                    console.log('clicked on recipe! ' + data[h].title);
+                    //aangeklikte recept zijn naam/id weergeven
+                });
+            };
         });
+}
+
+function showRecipe() {
+
 }
