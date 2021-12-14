@@ -11,9 +11,6 @@ window.onload = function () {
     });
 };
 
-
-console.log(event.target);
-
 function fetchData(inputIngredients) {
     console.log(inputIngredients);
 
