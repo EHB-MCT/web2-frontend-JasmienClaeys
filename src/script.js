@@ -1,5 +1,5 @@
+import * as D from './credentials.js'
 import _ from 'lodash';
-import * as key from "credentials.js";
 
 
 window.onload = function () {
@@ -15,7 +15,7 @@ window.onload = function () {
 function fetchData(inputIngredients) {
     console.log(inputIngredients);
 
-    fetch(`https://api.spoonacular.com/recipes/findByIngredients?${key}&ingredients=${inputIngredients}&number=10`)
+    fetch(`https://api.spoonacular.com/recipes/findByIngredients?${D.apiKey}&ingredients=${inputIngredients}&number=10`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
