@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import * as key from "credentials.js";
 
 
 window.onload = function () {
@@ -14,7 +15,7 @@ window.onload = function () {
 function fetchData(inputIngredients) {
     console.log(inputIngredients);
 
-    fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=052ac81a9d0f4b35bce9cc8e6e20d5e9&ingredients=${inputIngredients}&number=10`)
+    fetch(`https://api.spoonacular.com/recipes/findByIngredients?${key}&ingredients=${inputIngredients}&number=10`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
