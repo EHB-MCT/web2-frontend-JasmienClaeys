@@ -25,5 +25,9 @@
     "url": "https://github.com/EHB-MCT/web2-frontend-JasmienClaeys/issues"
   },
   "homepage": "https://github.com/EHB-MCT/web2-frontend-JasmienClaeys#readme",
+  "main": "webpack.config.js",
+  "directories": {
+    "doc": "docs"
+  },
   "description": ""
 }

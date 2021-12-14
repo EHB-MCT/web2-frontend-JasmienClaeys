@@ -19,17 +19,6 @@ eval("/* module decorator */ module = __webpack_require__.nmd(module);\nvar __WE
 
 /***/ }),
 
-/***/ "./src/credentials.js":
-/*!****************************!*\
-  !*** ./src/credentials.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"apiKey\": () => (/* binding */ apiKey)\n/* harmony export */ });\nlet apiKey = \"apiKey=052ac81a9d0f4b35bce9cc8e6e20d5e9\";\r\n\r\n\n\n//# sourceURL=webpack://web2-frontend-jasmienclaeys/./src/credentials.js?");
-
-/***/ }),
-
 /***/ "./src/script.js":
 /*!***********************!*\
   !*** ./src/script.js ***!
@@ -137,8 +126,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var loda
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	__webpack_require__("./src/script.js");
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/credentials.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/script.js");
 /******/ 	
 /******/ })()
 ;
