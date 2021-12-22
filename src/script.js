@@ -45,15 +45,21 @@ function fetchData(inputIngredients) {
                 let htmlString = `
                     <div id="recipeItem">
                         <div id="recipe">
-                            <h2>${data[h].title}</h2>
-                            <img src="${data[h].image}" alt="">
-                            <p id="usedIngredients"> Your ingredients used: ${usedIngredients}</p>
-                            <p id="otherIngredients"> Other ingredients used: ${missingIngredients}</p>
+                            <div id="hAndImg">
+                                <h2>${data[h].title}</h2>
+                                <img id="img" src="${data[h].image}" alt="">
+                            </div>
+                            <div id="textRecipe">
+                                <p id="usedIngredients"> Your ingredients used: ${usedIngredients}</p>
+                                <p id="otherIngredients"> Other ingredients used: ${missingIngredients}</p>
+                            </div>
                         </div>
-                        <button id="saveRecipeBtn">Save recipe</button>
+                    <button id="saveRecipeBtn">Save recipe</button>
                     </div>`;
-
+                            
+                            // <p id="summmaryRecipe">${data[h].summary}</p>
                 document.getElementById('recipeList').insertAdjacentHTML("afterbegin", htmlString);
+
 
                 document.getElementById('saveRecipeBtn').addEventListener('click', event => {
                     event.preventDefault();
@@ -65,10 +71,31 @@ function fetchData(inputIngredients) {
                     event.preventDefault();
 
                     console.log('clicked on recipe! ' + data[h].title);
-                    //aangeklikte recept zijn naam/id weergeven
+
+                    let idRecipe = data[h].id
+                    showSummary(idRecipe);
+
                 });
             };
         });
+}
+
+
+function showSummary() {
+    fetch(`https://api.spoonacular.com/recipes/${idRecipe}/summary?${D.apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+
+            let dataSummaries = [];
+            for (let k = 0; k < countUsedIngredients; k++) {
+                let dataSummary = data[k].summary;
+
+                dataSummaries.push(" " + dataSummary);
+                console.log(dataSummaries);
+            }
+        });
+
 }
 
 function showRecipe() {

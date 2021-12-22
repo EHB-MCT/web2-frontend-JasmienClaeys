@@ -1,44 +1,95 @@
-body{
+body {
+    font-family: "Georgia", Times, serif;
     margin: 0;
+}
+
+#homepageBtn {
+    display: flex;
+    margin-left: 22%;
+    padding: 0;
+    list-style-type: none;
+}
+
+li {
+    margin-left: 5%;
+    width: 150px;
+    height: 20px;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+li:hover {
+    font-size: 20px;
+    border-bottom: darkgreen;
 }
 
 header {
-    margin:0;
-    margin-bottom: 2%;
-    padding: 6% 8%;
-    /* background-color: #ec4949; */
-    /* background-color: #38e0a3; */
-    background-color: #B0FFAE;
-}
-
-h1{
     margin: 0;
-    font-size: 50px;
-    font-weight: 800;
+    margin-bottom: 2%;
+    padding: 2% 6%;
+    background-color: #61c95f;
+    display: flex;
+    width: 100%;
+    height: 10%;
 }
 
-h2{
+h1 {
+    margin: 0;
+    font-family: "Elephant", Times, serif;
+    font-size: 40px;
+    font-weight: 800;
+    width: 45%;
+}
+
+h2 {
     margin-top: 0;
     font-size: 30px;
 }
 
-#searchIngrForm{
-margin: 0.2% 1%;
+#searchIngrForm {
+    margin: 0.2% 1%;
 }
 
-#recipeItem{
-margin: 3% 1%;
-display: flex;
-flex-direction: row;
-/* flex-wrap: nowrap; */
+#recipeItem {
+    margin: 3% 0%;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* flex-wrap: nowrap; */
 }
 
-#recipeItem.img{
-    margin: 1%;
-    margin-left: 4%;
+#recipe {
+    margin: 1% 3%;
+    width: 95%;
+    display: flex;
 }
 
-#saveRecipeBtn{
+#recipeItem:nth-child(odd) {
+    background: #B1FFB1;
+}
+
+#hAndImg{
+    width: 40%;
+}
+#textRecipe{
+    width: 50%;
+}
+
+#img {
+    margin-left: 3%;
+}
+
+#saveRecipeBtn {
     width: 100px;
     height: 20px;
+    margin-top: 15%;
+    margin-right: 0%;
+}
+
+#usedIngredients {
+    margin-bottom: 0;
+}
+
+#otherIngredients {
+    margin-top: 5px;
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./index.css">
     <!-- <script src="https://unpkg.com/lodash@4.17.20"></script> -->
-    <!-- <script src="script.js"></script> -->
+    <!-- <script src="../src/script.js"></script> -->
     <script src="./main.js"></script>
     <title>eindopdracht WEB II</title>
 </head>
@@ -14,8 +14,10 @@
     <div id="container">
         <header>
             <h1>Find your recipe</h1>
-            <li>Favorite recipes</li>
-            <li></li>
+            <ul id="homepageBtn">
+                <li>Home</li>
+                <li>Favorite recipes</li>
+            </ul>
         </header>
         <div id="searchIngrForm">
             <form id="form">
@@ -28,6 +30,7 @@
                 <div id="recipe">
                     <h2></h2>
                     <img src="" alt="">
+                    <p id="summmaryRecipe"></p>
                     <p id="usedIngredients"></p>
                     <p id="otherIngredients"></p>
                 </div>
