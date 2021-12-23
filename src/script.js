@@ -5,19 +5,18 @@ import _ from 'lodash';
 window.onload = function () {
     document.getElementById('form').addEventListener('submit', event => {
         event.preventDefault();
+        document.getElementById('fullRecipe').style.display = "none";
+
         let inputIngredients = document.getElementById('inputIngredients').value;
 
-        document.getElementById('fullRecipe').style.display = "none";
         fetchData(inputIngredients);
-
-
     });
 };
 
 function fetchData(inputIngredients) {
     console.log(inputIngredients);
 
-    fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=052ac81a9d0f4b35bce9cc8e6e20d5e9&ingredients=${inputIngredients}&number=10`)
+    fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=75381d3d2fc7422aa772ef4119eeb656&ingredients=${inputIngredients}&number=10`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -47,7 +46,7 @@ function fetchData(inputIngredients) {
                 let idRecipe = data[h].id
 
 
-                fetch(`https://api.spoonacular.com/recipes/${idRecipe}/summary?apiKey=052ac81a9d0f4b35bce9cc8e6e20d5e9`)
+                fetch(`https://api.spoonacular.com/recipes/${idRecipe}/summary?apiKey=75381d3d2fc7422aa772ef4119eeb656`)
                     .then(response => response.json())
                     .then(dataOfSummery => {
                         let summaries = [];
@@ -101,26 +100,42 @@ function showRecipe(idRecipe, dataInformation) {
 
     console.log('Show tha recipeeee')
 
-    fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=052ac81a9d0f4b35bce9cc8e6e20d5e9`)
+    fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=75381d3d2fc7422aa772ef4119eeb656`)
         .then(response => response.json())
         .then(dataFullRecipe => {
+            console.log(dataFullRecipe)
 
-            for (let h = 0; h < extendedIngredients.length; h++) {
+            let dataIngredientsAmount = dataFullRecipe.extendedIngredients
+
+            for (let h = 0; h <= dataIngredientsAmount.length; h++) {
+                let ingredients = [];
+            
+                let dataIngredients = dataFullRecipe[h].ingredients;
+               
+                for (let l = 0; l <= dataIngredientsAmount.length; l++) {
+                    let ingredient = dataIngredients[i].name;
+
+
+                    ingredients.push(" " + ingredient);
+                }
+
+
                 let htmlString = `
                 <div id="fullRecipe">
                     <div id="recInformation">
                         <h2>${dataFullRecipe.title}</h2>
-                        <img src="${dataFullRecipe.imgage}" alt="">
+                        <img src="${dataFullRecipe.image}" alt="">
                         <p id="servings>${servings}</p>
                         <p id="timeReady">${readyInMinutes}</p>
                         <p id="ingredients">${dataFullRecipe.ingredients}</p>
+                        <p id="ingredients>${extendedIngredients[h].measures.metric.amount} ${extendedIngredients[h].measures.metric.unitShort} ${extendedIngredients[h].name}</p>
                         
-                        <p id="ingredients>${extendedIngredients[h].name}</p>
-                        <p id="ingredients>${extendedIngredients[h].original}</p>
+                        <p id="ingredients>${ingredients}</p>
                     </div>
                     <button id="saveRecipeBtn">Save recipe</button>
                 </div>`
-
+                        
+                // <p id="ingredients>${extendedIngredients[h].name}: ${extendedIngredients[h].measures.metric.amount}</p>
                 //<p id="summary>${dataFullRecipe.ingredients}</p>
 
                 document.getElementById('fullRecipe').insertAdjacentHTML("afterbegin", htmlString);
