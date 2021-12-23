@@ -93,3 +93,10 @@ h2 {
 #otherIngredients {
     margin-top: 5px;
 }
+
+#showRecipeBtn {
+    width: 100px;
+    height: 20px;
+    margin-top: 15%;
+    margin-right: 0%;
+}

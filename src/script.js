@@ -6,6 +6,8 @@ window.onload = function () {
     document.getElementById('form').addEventListener('submit', event => {
         event.preventDefault();
         let inputIngredients = document.getElementById('inputIngredients').value;
+
+        document.getElementById('fullRecipe').style.display = "none";
         fetchData(inputIngredients);
 
 
@@ -43,21 +45,24 @@ function fetchData(inputIngredients) {
                 }
 
                 let idRecipe = data[h].id
-                
+
 
                 fetch(`https://api.spoonacular.com/recipes/${idRecipe}/summary?apiKey=052ac81a9d0f4b35bce9cc8e6e20d5e9`)
-                .then(response => response.json())
-                .then(dataOfSummery => {
-                    let summaries = [];
-                    for (let k = 0; k < countUsedIngredients; k++) {
-                        let summary = dataOfSummery[k].summary;
-                        // console.log(dataOfSummery.summary);
+                    .then(response => response.json())
+                    .then(dataOfSummery => {
+                        let summaries = [];
+                        for (let k = 0; k < countUsedIngredients; k++) {
+                            let summary = dataOfSummery.summary;
+                            summaries.push(" " + summary);
 
-                        summaries.push(" " + summary);
-                        // console.log(summaries);
+                            let dataInformation = {
+                                title: data[h].title,
+                                img: data[h].image,
+                                ingredients: data[h].ingredients,
+                                summary: summary
+                            };
 
-
-                        let htmlString = `
+                            let htmlString = `
                             <div id="recipeItem">
                                 <div id="recipe">
                                     <div id="hAndImg">
@@ -72,86 +77,63 @@ function fetchData(inputIngredients) {
                                 </div>
                             <button id="showRecipeBtn">Show recipe</button>
                             </div>`;
-                            
-                        document.getElementById('recipeList').insertAdjacentHTML("afterbegin", htmlString);
 
-                        document.getElementById('showRecipeBtn').addEventListener('click', event => {
-                            event.preventDefault();
+                            document.getElementById('recipeList').insertAdjacentHTML("afterbegin", htmlString);
 
-                            console.log('clicked on recipe! ' + data[h].title);
+                            document.getElementById('showRecipeBtn').addEventListener('click', event => {
+                                event.preventDefault();
 
-                            showRecipe(idRecipe)
-                        });
-                        
-                    }
+                                console.log('clicked on recipe! ' + data[h].title);
 
-                });
+                                showRecipe(idRecipe, dataInformation)
 
-                // showSummary(idRecipe, countUsedIngredients, data, usedIngredients, missingIngredients);
+                            });
+                        }
+
+                    });
             };
         });
 }
 
-
-function showSummary(idRecipe, countUsedIngredients, data, usedIngredients, missingIngredients) {
-    // fetch(`https://api.spoonacular.com/recipes/${idRecipe}/summary?apiKey=052ac81a9d0f4b35bce9cc8e6e20d5e9`)
-    //     .then(response => response.json())
-    //     .then(dataOfSummery => {
-    //         // console.log(data);
-
-    //         let summaries = [];
-    //         for (let h = 0; h < countUsedIngredients; h++) {
-    //             let summary = dataOfSummery.summary;
-    //             // console.log(dataOfSummery.summary);
-
-    //             summaries.push(" " + summary);
-    //             // console.log(summaries);
-
-
-    //             let htmlString = `
-    //                 <div id="recipeItem">
-    //                     <div id="recipe">
-    //                         <div id="hAndImg">
-    //                             <h2>${data[h].title}</h2>
-    //                             <img id="img" src="${data[h].image}" alt="">
-    //                         </div>
-    //                         <div id="textRecipe">
-    //                             <p id="usedIngredients"> Your ingredients used: ${usedIngredients}</p>
-    //                             <p id="otherIngredients"> Other ingredients used: ${missingIngredients}</p>
-    //                             <p id="summmaryRecipe">${dataOfSummery.summary}</p>
-    //                         </div>
-    //                     </div>
-    //                 <button id="showRecipeBtn">Show recipe</button>
-    //                 </div>`;
-                    
-    //             document.getElementById('recipeList').insertAdjacentHTML("afterbegin", htmlString);
-
-    //             document.getElementById('showRecipeBtn').addEventListener('click', event => {
-    //                 event.preventDefault();
-
-    //                 console.log('clicked on recipe! ' + data[h].title);
-
-    //                 showRecipe(idRecipe)
-    //             });
-
-    //         }
-
-    //     });
-
-}
-
-function showRecipe(idRecipe) {
+function showRecipe(idRecipe, dataInformation) {
+    document.getElementById('recipeList').style.display = "none";
+    document.getElementById('fullRecipe').style.display = "inline-block";
 
     console.log('Show tha recipeeee')
 
-    // let htmlString = `
-    // <button id="saveRecipeBtn">Save recipe</button>`
+    fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=052ac81a9d0f4b35bce9cc8e6e20d5e9`)
+        .then(response => response.json())
+        .then(dataFullRecipe => {
+
+            for (let h = 0; h < extendedIngredients.length; h++) {
+                let htmlString = `
+                <div id="fullRecipe">
+                    <div id="recInformation">
+                        <h2>${dataFullRecipe.title}</h2>
+                        <img src="${dataFullRecipe.imgage}" alt="">
+                        <p id="servings>${servings}</p>
+                        <p id="timeReady">${readyInMinutes}</p>
+                        <p id="ingredients">${dataFullRecipe.ingredients}</p>
+                        
+                        <p id="ingredients>${extendedIngredients[h].name}</p>
+                        <p id="ingredients>${extendedIngredients[h].original}</p>
+                    </div>
+                    <button id="saveRecipeBtn">Save recipe</button>
+                </div>`
+
+                //<p id="summary>${dataFullRecipe.ingredients}</p>
+
+                document.getElementById('fullRecipe').insertAdjacentHTML("afterbegin", htmlString);
+
+            }
+
+            document.getElementById('saveRecipeBtn').addEventListener('click', event => {
+                event.preventDefault();
+
+                console.log('clicked save recipe! ' + dataInformation.title + ' id = ' + idRecipe);
+            });
+        });
 
 
-    // document.getElementById('saveRecipeBtn').addEventListener('click', event => {
-    //     event.preventDefault();
-
-    //     console.log('clicked save recipe! ' + data[h].title + 'id= ' + data[h].id)
-    // });
 
 }
